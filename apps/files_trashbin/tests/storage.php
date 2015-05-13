@@ -190,11 +190,14 @@ class Storage extends \Test\TestCase {
 		 */
 		$storage = $this->getMockBuilder('\OC\Files\Storage\Temporary')
 			->setConstructorArgs([[]])
-			->setMethods(['rename', 'unlink'])
+			->setMethods(['rename', 'unlink', 'moveFromStorage'])
 			->getMock();
 
 		$storage->expects($this->any())
 			->method('rename')
+			->will($this->returnValue(false));
+		$storage->expects($this->any())
+			->method('moveFromStorage')
 			->will($this->returnValue(false));
 		$storage->expects($this->any())
 			->method('unlink')
